@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://aminatacoul80-arch.github.io/cabinet-al-shifa/sitemap.xml
