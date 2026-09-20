@@ -57,6 +57,57 @@
     </div>
   </section>
 
+  <section class="contact-form">
+    <h2>Être rappelé</h2>
+    <p class="muted-80">Si vous préférez ne pas écrire sur WhatsApp, laissez vos coordonnées : nous vous rappelons pendant les heures d’ouverture.</p>
+
+    <form id="demande-contact" novalidate>
+      <div class="field">
+        <label for="nom">Votre nom</label>
+        <input id="nom" name="nom" type="text" autocomplete="name" maxlength="255" required>
+      </div>
+
+      <div class="field">
+        <label for="telephone">Votre téléphone</label>
+        <input id="telephone" name="telephone" type="tel" inputmode="tel" autocomplete="tel" placeholder="76 00 00 00" required>
+      </div>
+
+      <div class="field">
+        <label for="service_souhaite">Le soin souhaité</label>
+        <select id="service_souhaite" name="service_souhaite" required>
+          <option value="">Choisissez un soin</option>
+          <option>Injections et perfusions</option>
+          <option>Pansements et plaies</option>
+          <option>Soins post-opératoires</option>
+          <option>Suivi du diabète et de la tension</option>
+          <option>Sondage urinaire</option>
+          <option>Prélèvements et analyses</option>
+          <option>Accompagnement des personnes âgées</option>
+          <option>Soins palliatifs</option>
+          <option>Garde-malade</option>
+          <option>Kinésithérapie</option>
+          <option>Je ne sais pas encore</option>
+        </select>
+      </div>
+
+      <div class="field field-full">
+        <label for="message">Précisions <span class="muted-70">(facultatif)</span></label>
+        <textarea id="message" name="message" rows="4" maxlength="1000" placeholder="Le quartier, le moment qui vous arrange, l’état de la personne…"></textarea>
+      </div>
+
+      <!-- Piège à robots : un visiteur ne le voit pas et ne le remplit jamais. -->
+      <div class="field-piege" aria-hidden="true">
+        <label for="site-web">Ne remplissez pas ce champ</label>
+        <input id="site-web" name="site_web" type="text" tabindex="-1" autocomplete="off">
+      </div>
+
+      <div class="field-full form-actions">
+        <button class="btn btn-primary" type="submit">Envoyer ma demande</button>
+        <p class="form-statut muted-80" role="status" aria-live="polite"></p>
+      </div>
+    </form>
+  </section>
+
   <section class="contact-details">
     <div class="cols cols-3">
       <div>
@@ -111,5 +162,6 @@
   <p class="footer-copy">© 2026 Cabinet de santé AL SHIFA. Tarifs sur devis.</p>
 </footer>
 
+<script src="contact.js"></script>
 </body>
 </html>
