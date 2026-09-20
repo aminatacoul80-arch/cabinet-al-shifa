@@ -82,7 +82,9 @@ a:hover { color: var(--color-accent-2); }
   padding: 14px clamp(20px, 5vw, 72px);
   border-bottom: 1px solid var(--color-text);
 }
-.brand { display: flex; flex-direction: column; line-height: 1; }
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand-logo { height: 42px; width: auto; display: block; flex: none; }
+.brand-text { display: flex; flex-direction: column; line-height: 1; }
 .brand-name { font-family: var(--font-heading); font-weight: 600; font-size: 20px; letter-spacing: -0.02em; }
 .brand-tagline { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; margin-top: 5px; color: var(--color-accent-700); }
 .site-nav { display: flex; gap: 22px; margin-left: auto; font-size: 14.5px; }
