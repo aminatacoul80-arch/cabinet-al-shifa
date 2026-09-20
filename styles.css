@@ -1,23 +1,34 @@
-/* Cabinet de santé AL SHIFA — site styles.
-   Tokens adapted from the Broadsheet design system used in the prototype. */
-@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap');
+/* Cabinet de santé AL SHIFA — styles du site.
+
+   Couleurs, typographie et proportions repris de la charte graphique du
+   cabinet : turquoise principal, gris anthracite, gris clair, blanc, et
+   Montserrat en SemiBold pour les titres, Regular pour le texte. */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
 
 :root {
-  --color-bg: #f3f2f2;
-  --color-text: #201e1d;
-  --color-accent: #0088b0;
-  --color-accent-600: #1186ac;
-  --color-accent-700: #006786;
-  --color-accent-2: #d6006c;
+  /* — couleurs de la charte — */
+  --color-bg: #f5f6f7;          /* gris clair */
+  --color-text: #222e3b;        /* gris anthracite */
+  --color-accent: #01989d;      /* turquoise principal */
+  --color-accent-600: #018589;  /* survol */
+  --color-accent-700: #016c70;  /* liens et états actifs */
+  --color-surface: #ffffff;
+  --color-tint: color-mix(in srgb, var(--color-accent) 8%, #ffffff);
   --color-divider: color-mix(in srgb, var(--color-text) 16%, transparent);
+  /* Hors charte, réservé aux erreurs de saisie : le rouge est le seul signal
+     qu'un visiteur lit sans avoir à réfléchir. */
+  --color-alerte: #c0392b;
 
-  --font-heading: "Source Serif 4", system-ui, sans-serif;
-  --font-body: "Source Serif 4", system-ui, sans-serif;
+  --font-heading: "Montserrat", system-ui, sans-serif;
+  --font-body: "Montserrat", system-ui, sans-serif;
 
   --space-2: 10px;
   --space-3: 15px;
   --space-4: 20px;
-  --radius-md: 2px;
+  --radius-md: 8px;
+  --radius-lg: 18px;
+  --ombre: 0 1px 2px color-mix(in srgb, var(--color-text) 8%, transparent),
+           0 8px 24px color-mix(in srgb, var(--color-text) 6%, transparent);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -37,7 +48,7 @@ body {
 h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: 600; margin: 0; }
 p { margin: 0; }
 a { color: var(--color-accent-700); text-decoration: none; }
-a:hover { color: var(--color-accent-2); }
+a:hover { color: var(--color-accent); }
 :focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
 
 .muted-70 { color: color-mix(in srgb, var(--color-text) 70%, transparent); }
@@ -60,11 +71,12 @@ a:hover { color: var(--color-accent-2); }
   font-family: var(--font-heading); font-weight: 600;
   font-size: 14px; line-height: 1.2; color: var(--color-text);
   background: transparent; border: 1px solid transparent;
-  padding: var(--space-2) calc(var(--space-3) * 1.2);
-  border-radius: var(--radius-md);
+  padding: 12px 20px; min-height: 44px;
+  border-radius: 999px;
+  transition: background 0.15s ease, color 0.15s ease;
 }
-.btn-primary { background: var(--color-accent); color: var(--color-bg); }
-.btn-primary:hover { background: var(--color-accent-600); color: var(--color-bg); }
+.btn-primary { background: var(--color-accent); color: var(--color-surface); }
+.btn-primary:hover { background: var(--color-accent-600); color: var(--color-surface); }
 .btn-primary:active { background: var(--color-accent-700); }
 .btn-secondary { border-color: var(--color-divider); color: var(--color-text); }
 .btn-secondary:hover { background: color-mix(in srgb, var(--color-text) 7%, transparent); color: var(--color-text); }
@@ -77,10 +89,10 @@ a:hover { color: var(--color-accent-2); }
 /* — header — */
 .site-header {
   position: sticky; top: 0; z-index: 20;
-  background: var(--color-bg);
+  background: var(--color-surface);
   display: flex; align-items: center; gap: 24px;
   padding: 14px clamp(20px, 5vw, 72px);
-  border-bottom: 1px solid var(--color-text);
+  border-bottom: 1px solid var(--color-divider);
 }
 .brand { display: flex; align-items: center; gap: 12px; }
 .brand-logo { height: 42px; width: auto; display: block; flex: none; }
@@ -89,7 +101,7 @@ a:hover { color: var(--color-accent-2); }
 .brand-tagline { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; margin-top: 5px; color: var(--color-accent-700); }
 .site-nav { display: flex; gap: 22px; margin-left: auto; font-size: 14.5px; }
 .site-nav a { color: var(--color-text); }
-.site-nav a[aria-current="page"] { color: var(--color-accent-2); }
+.site-nav a[aria-current="page"] { color: var(--color-accent); }
 .btn-whatsapp { margin-left: 16px; white-space: nowrap; }
 
 /* — hero / split sections — */
@@ -128,10 +140,10 @@ a:hover { color: var(--color-accent-2); }
 /* — meta strip (dateline rule) — */
 .meta-strip { padding: clamp(28px, 4vw, 48px) 0; }
 .meta-strip .rule-thick {
-  height: 5px; border: 0; margin: 0;
-  border-top: 2px solid var(--color-text); border-bottom: 1px solid var(--color-text);
+  height: 3px; border: 0; margin: 0;
+  background: var(--color-accent); border-radius: 2px;
 }
-.meta-strip .rule-thin { height: 0; border: 0; border-top: 1px solid var(--color-text); margin: 0; }
+.meta-strip .rule-thin { height: 0; border: 0; border-top: 1px solid var(--color-divider); margin: 0; }
 .meta-strip-row {
   display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 28px;
   padding: 14px 0; font-size: 12.5px; letter-spacing: 0.08em; text-transform: uppercase;
@@ -144,10 +156,17 @@ a:hover { color: var(--color-accent-2); }
 .cols-4 { grid-template-columns: repeat(4, 1fr); }
 
 .steps { padding: clamp(28px, 4vw, 48px) 0 clamp(44px, 6vw, 80px); }
+.steps .cols { gap: 20px clamp(20px, 2.5vw, 32px); }
+.step {
+  background: var(--color-surface); border-radius: var(--radius-lg);
+  padding: clamp(22px, 2.4vw, 30px); box-shadow: var(--ombre);
+}
 .step-num {
-  display: block; font-family: var(--font-heading); font-weight: 600;
-  font-size: 34px; line-height: 1; letter-spacing: -0.03em;
-  color: var(--color-accent-700); margin-bottom: 14px;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--color-tint); color: var(--color-accent-700);
+  font-family: var(--font-heading); font-weight: 600;
+  font-size: 19px; line-height: 1; margin-bottom: 16px;
 }
 .step h3 { font-size: 20px; line-height: 1.3; }
 .step p { font-size: 15.5px; line-height: 1.7; margin: 10px 0 0; }
@@ -177,8 +196,12 @@ a:hover { color: var(--color-accent-2); }
 .soins-full-cta { margin-top: 56px; }
 
 /* — app teaser — */
-.app-teaser { padding: 0 0 clamp(52px, 7vw, 96px); }
-.app-teaser .eyebrow { color: var(--color-accent-2); margin-bottom: 18px; }
+.app-teaser {
+  background: var(--color-tint); border-radius: var(--radius-lg);
+  padding: clamp(28px, 4vw, 52px);
+  margin-bottom: clamp(52px, 7vw, 96px);
+}
+.app-teaser .eyebrow { color: var(--color-accent-700); margin-bottom: 18px; }
 .app-teaser h2 { font-size: clamp(28px, 3.2vw, 40px); line-height: 1.2; letter-spacing: -0.02em; max-width: 18ch; }
 .app-teaser > div > p.lede { font-size: 16.5px; line-height: 1.75; max-width: 50ch; margin: 22px 0 0; }
 .app-steps { display: grid; gap: 14px; margin-top: 28px; max-width: 44ch; }
@@ -188,10 +211,10 @@ a:hover { color: var(--color-accent-2); }
 
 /* — FAQ — */
 .faq { padding: 0 0 clamp(44px, 6vw, 80px); }
-.faq-list { display: grid; gap: 0; max-width: 78ch; }
+.faq-list { display: grid; gap: 10px; max-width: 78ch; }
 .faq-item {
-  border-top: 1px solid color-mix(in srgb, var(--color-text) 22%, transparent);
-  padding: 16px 0;
+  background: var(--color-surface); border-radius: var(--radius-md);
+  padding: 18px clamp(18px, 2vw, 24px);
 }
 .faq-item summary {
   cursor: pointer; list-style: none;
@@ -201,15 +224,29 @@ a:hover { color: var(--color-accent-2); }
 .faq-item p { font-size: 15.5px; line-height: 1.75; margin: 12px 0 0; max-width: 60ch; }
 
 /* — final CTA — */
-.cta-final { padding: 0 0 clamp(52px, 7vw, 96px); }
+.cta-final {
+  background: var(--color-accent); color: var(--color-surface);
+  border-radius: var(--radius-lg); padding: clamp(30px, 4vw, 56px);
+  margin-bottom: clamp(52px, 7vw, 96px);
+}
+/* Sur l'aplat turquoise, les gris atténués du texte courant ne passent plus. */
+.cta-final .muted-70, .cta-final .muted-72,
+.cta-final .muted-78, .cta-final .muted-80 { color: color-mix(in srgb, var(--color-surface) 88%, transparent); }
+.cta-final .btn-ghost { color: var(--color-surface); }
+.cta-final .btn-ghost:hover { background: color-mix(in srgb, var(--color-surface) 15%, transparent); color: var(--color-surface); }
 .cta-final h3 { font-size: 28px; line-height: 1.25; letter-spacing: -0.015em; }
 .cta-final p { font-size: 16px; line-height: 1.7; margin: 16px 0 0; max-width: 56ch; }
+.cta-final .btn-primary { background: var(--color-surface); color: var(--color-accent-700); }
+.cta-final .btn-primary:hover { background: color-mix(in srgb, var(--color-surface) 88%, var(--color-accent)); color: var(--color-accent-700); }
+.cta-final .btn-secondary { border-color: color-mix(in srgb, var(--color-surface) 55%, transparent); color: var(--color-surface); }
+.cta-final .btn-secondary:hover { background: color-mix(in srgb, var(--color-surface) 15%, transparent); color: var(--color-surface); }
 .cta-final .cta-row { margin-top: 26px; }
 
 /* — équipe page — */
 .equipe-copy blockquote {
-  margin: 32px 0 0; font-family: var(--font-heading); font-style: italic; font-weight: 400;
-  font-size: clamp(22px, 2.4vw, 30px); line-height: 1.35; letter-spacing: -0.01em; max-width: 26ch;
+  margin: 32px 0 0; padding-left: 20px; border-left: 3px solid var(--color-accent);
+  font-family: var(--font-heading); font-weight: 500;
+  font-size: clamp(21px, 2.2vw, 28px); line-height: 1.4; letter-spacing: -0.01em; max-width: 26ch;
 }
 .equipe-copy p.body { font-size: 16px; line-height: 1.75; max-width: 52ch; margin: 24px 0 0; }
 .equipe-copy p.body:first-of-type { margin-top: 36px; }
@@ -217,6 +254,10 @@ a:hover { color: var(--color-accent-2); }
 /* — contact page — */
 .contact-hero { padding: clamp(40px, 6vw, 80px) 0 clamp(20px, 3vw, 36px); }
 .contact-details { padding: clamp(28px, 4vw, 48px) 0 clamp(52px, 7vw, 96px); }
+.contact-details .cols > div {
+  background: var(--color-surface); border-radius: var(--radius-lg);
+  padding: clamp(20px, 2.2vw, 28px); box-shadow: var(--ombre);
+}
 .contact-details h2 { font-size: 21px; line-height: 1.3; }
 .contact-details p { font-size: 16px; line-height: 1.7; margin: 14px 0 0; }
 .contact-note { font-size: 15.5px; line-height: 1.7; margin: 44px 0 0; max-width: 52ch; }
@@ -233,6 +274,8 @@ a:hover { color: var(--color-accent-2); }
   display: grid; grid-template-columns: repeat(2, 1fr);
   gap: var(--space-4) clamp(20px, 3vw, 40px);
   margin-top: 28px; max-width: 760px;
+  background: var(--color-surface); border-radius: var(--radius-lg);
+  padding: clamp(22px, 2.6vw, 32px); box-shadow: var(--ombre);
 }
 .field { display: grid; gap: 7px; }
 .field-full { grid-column: 1 / -1; }
@@ -253,10 +296,13 @@ a:hover { color: var(--color-accent-2); }
 .field-piege { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .form-actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 4px; }
 .form-statut { font-size: 14.5px; line-height: 1.6; margin: 0; }
-.form-statut-erreur { color: var(--color-accent-2); }
+.form-statut-erreur { color: var(--color-alerte); }
 
 /* — footer — */
-.site-footer { padding: 36px clamp(20px, 5vw, 72px) 52px; border-top: 1px solid color-mix(in srgb, var(--color-text) 25%, transparent); }
+.site-footer {
+  background: var(--color-surface); margin-top: clamp(28px, 4vw, 48px);
+  padding: 44px clamp(20px, 5vw, 72px) 52px; border-top: 3px solid var(--color-accent);
+}
 .footer-brand { font-family: var(--font-heading); font-weight: 600; font-size: 17px; line-height: 1.3; }
 .footer-tagline { font-size: 14px; line-height: 1.7; margin: 12px 0 0; max-width: 30ch; }
 .footer-heading { display: block; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 70%, transparent); }
@@ -268,8 +314,19 @@ a:hover { color: var(--color-accent-2); }
   .split { grid-template-columns: 1fr; }
   .cols-3, .cols-4, .soins-full .cols { grid-template-columns: 1fr; }
   .contact-form form { grid-template-columns: 1fr; }
-  .site-header { flex-wrap: wrap; gap: 4px 16px; }
+  .site-header { flex-wrap: wrap; gap: 4px 12px; }
   .site-nav { order: 3; width: 100%; margin-left: 0; gap: 18px; overflow-x: auto; }
   .site-nav a { display: inline-block; padding: 10px 0; min-height: 24px; }
   .btn-whatsapp { margin-left: auto; }
+
+  /* Montserrat est plus large que la police d'origine : sans ces retouches,
+     la marque et le bouton WhatsApp ne tiennent pas sur une ligne de
+     téléphone et poussent toute la page vers la droite. */
+  .brand { gap: 9px; min-width: 0; }
+  .brand-logo { height: 34px; }
+  .brand-name { font-size: 16px; }
+  /* La signature est la ligne la plus longue de l'en-tête : réduite, elle tient
+     sous le nom sans imposer sa largeur au reste de la page. */
+  .brand-tagline { font-size: 9px; letter-spacing: 0.08em; margin-top: 4px; }
+  .btn { padding: 10px 16px; font-size: 13.5px; }
 }
